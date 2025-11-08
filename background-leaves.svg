@@ -1,0 +1,83 @@
+<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Beautiful green leaf background -->
+  <defs>
+    <!-- Gradient for depth -->
+    <linearGradient id="leafGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a7c59;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2c5f2d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="leafGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#66bb6a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4caf50;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="leafGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#81c784;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#66bb6a;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Leaf shapes -->
+    <path id="leaf1" d="M 0,0 Q 5,-10 10,0 Q 5,10 0,0 Z" fill="url(#leafGradient1)" opacity="0.7"/>
+    <path id="leaf2" d="M 0,0 Q 7,-15 14,0 Q 7,15 0,0 Z" fill="url(#leafGradient2)" opacity="0.6"/>
+    <path id="leaf3" d="M 0,0 Q 4,-8 8,0 Q 4,8 0,0 Z" fill="url(#leafGradient3)" opacity="0.5"/>
+  </defs>
+  
+  <!-- Background gradient -->
+  <rect width="1920" height="1080" fill="url(#bgGradient)"/>
+  <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" style="stop-color:#a5d6a7;stop-opacity:1" />
+    <stop offset="100%" style="stop-color:#81c784;stop-opacity:1" />
+  </linearGradient>
+  <rect width="1920" height="1080" fill="url(#bgGradient)"/>
+  
+  <!-- Scattered leaves -->
+  <use href="#leaf1" x="100" y="150" transform="rotate(30 100 150) scale(3)"/>
+  <use href="#leaf2" x="300" y="80" transform="rotate(-45 300 80) scale(2.5)"/>
+  <use href="#leaf3" x="500" y="200" transform="rotate(60 500 200) scale(2)"/>
+  <use href="#leaf1" x="700" y="120" transform="rotate(-20 700 120) scale(3.5)"/>
+  <use href="#leaf2" x="900" y="180" transform="rotate(45 900 180) scale(2.8)"/>
+  <use href="#leaf3" x="1100" y="90" transform="rotate(-60 1100 90) scale(2.2)"/>
+  <use href="#leaf1" x="1300" y="160" transform="rotate(15 1300 160) scale(3.2)"/>
+  <use href="#leaf2" x="1500" y="100" transform="rotate(-30 1500 100) scale(2.6)"/>
+  <use href="#leaf3" x="1700" y="140" transform="rotate(50 1700 140) scale(2.4)"/>
+  
+  <use href="#leaf1" x="200" y="400" transform="rotate(-55 200 400) scale(2.7)"/>
+  <use href="#leaf2" x="400" y="350" transform="rotate(25 400 350) scale(3.1)"/>
+  <use href="#leaf3" x="600" y="420" transform="rotate(-40 600 420) scale(2.3)"/>
+  <use href="#leaf1" x="800" y="380" transform="rotate(70 800 380) scale(2.9)"/>
+  <use href="#leaf2" x="1000" y="440" transform="rotate(-15 1000 440) scale(3.3)"/>
+  <use href="#leaf3" x="1200" y="360" transform="rotate(35 1200 360) scale(2.5)"/>
+  <use href="#leaf1" x="1400" y="410" transform="rotate(-50 1400 410) scale(2.8)"/>
+  <use href="#leaf2" x="1600" y="390" transform="rotate(55 1600 390) scale(3)"/>
+  <use href="#leaf3" x="1800" y="430" transform="rotate(-25 1800 430) scale(2.6)"/>
+  
+  <use href="#leaf1" x="150" y="650" transform="rotate(40 150 650) scale(3.4)"/>
+  <use href="#leaf2" x="350" y="600" transform="rotate(-35 350 600) scale(2.9)"/>
+  <use href="#leaf3" x="550" y="680" transform="rotate(65 550 680) scale(2.4)"/>
+  <use href="#leaf1" x="750" y="620" transform="rotate(-10 750 620) scale(3.1)"/>
+  <use href="#leaf2" x="950" y="690" transform="rotate(48 950 690) scale(2.7)"/>
+  <use href="#leaf3" x="1150" y="640" transform="rotate(-42 1150 640) scale(2.5)"/>
+  <use href="#leaf1" x="1350" y="670" transform="rotate(20 1350 670) scale(3.2)"/>
+  <use href="#leaf2" x="1550" y="610" transform="rotate(-58 1550 610) scale(2.8)"/>
+  <use href="#leaf3" x="1750" y="660" transform="rotate(38 1750 660) scale(2.6)"/>
+  
+  <use href="#leaf1" x="100" y="900" transform="rotate(-28 100 900) scale(3)"/>
+  <use href="#leaf2" x="300" y="850" transform="rotate(52 300 850) scale(2.5)"/>
+  <use href="#leaf3" x="500" y="920" transform="rotate(-45 500 920) scale(2.3)"/>
+  <use href="#leaf1" x="700" y="880" transform="rotate(32 700 880) scale(3.3)"/>
+  <use href="#leaf2" x="900" y="940" transform="rotate(-18 900 940) scale(2.7)"/>
+  <use href="#leaf3" x="1100" y="870" transform="rotate(58 1100 870) scale(2.4)"/>
+  <use href="#leaf1" x="1300" y="910" transform="rotate(-38 1300 910) scale(3.1)"/>
+  <use href="#leaf2" x="1500" y="890" transform="rotate(42 1500 890) scale(2.9)"/>
+  <use href="#leaf3" x="1700" y="930" transform="rotate(-22 1700 930) scale(2.6)"/>
+  
+  <!-- Additional scattered small leaves -->
+  <use href="#leaf3" x="250" y="250" transform="rotate(15 250 250) scale(1.5)"/>
+  <use href="#leaf3" x="450" y="500" transform="rotate(-35 450 500) scale(1.8)"/>
+  <use href="#leaf3" x="650" y="750" transform="rotate(55 650 750) scale(1.6)"/>
+  <use href="#leaf3" x="850" y="280" transform="rotate(-25 850 280) scale(1.7)"/>
+  <use href="#leaf3" x="1050" y="520" transform="rotate(45 1050 520) scale(1.9)"/>
+  <use href="#leaf3" x="1250" y="780" transform="rotate(-15 1250 780) scale(1.4)"/>
+  <use href="#leaf3" x="1450" y="300" transform="rotate(35 1450 300) scale(1.6)"/>
+  <use href="#leaf3" x="1650" y="550" transform="rotate(-45 1650 550) scale(1.8)"/>
+  <use href="#leaf3" x="1850" y="800" transform="rotate(25 1850 800) scale(1.5)"/>
+</svg>
