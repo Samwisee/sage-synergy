@@ -1,0 +1,1644 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sage Connection</title>
+    <meta
+      name="description"
+      content="Sage Connection is a vibrant community of experienced women connecting, supporting, and empowering one another."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Prata&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ─── Reset ─── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+
+      /* ─── Tokens ─── */
+      :root {
+        --cream: #f5f0e8;
+        --cream-dark: #ede7da;
+        --mist: #eef4ea;
+        --white: #ffffff;
+        --sage-deep: #213328;
+        --sage: #3d6150;
+        --sage-mid: #4d7358;
+        --sage-light: #7a9e7e;
+        --sage-pale: #c8ddbf;
+        --gold: #b8916a;
+        --ink: #1a2420;
+        --ink-muted: #5a6b62;
+        --line: #dde5d8;
+        --font-serif: "Prata", Georgia, serif;
+        --font-sans: "Manrope", system-ui, sans-serif;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --max: 1160px;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        color: var(--ink);
+        line-height: 1.75;
+        background: var(--white);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      /* ─── Utility ─── */
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+      .eyebrow {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 14px;
+      }
+      .eyebrow.light {
+        color: var(--sage-pale);
+      }
+      h2 {
+        font-family: var(--font-serif);
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+        font-weight: 400;
+        line-height: 1.18;
+        color: var(--sage-deep);
+        margin-bottom: 20px;
+      }
+      h2.light {
+        color: var(--white);
+      }
+      .lead {
+        font-size: 1.08rem;
+        color: var(--ink-muted);
+        line-height: 1.85;
+        max-width: 56ch;
+      }
+      .lead.light {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      p {
+        font-size: 0.97rem;
+        color: var(--ink-muted);
+        line-height: 1.82;
+      }
+      p + p {
+        margin-top: 14px;
+      }
+
+      /* ─── Buttons ─── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 30px;
+        border-radius: 999px;
+        font-family: var(--font-sans);
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        transition:
+          transform 0.2s var(--ease),
+          box-shadow 0.2s var(--ease),
+          background 0.2s;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn-sage {
+        background: var(--sage);
+        color: var(--white);
+        box-shadow: 0 4px 18px rgba(61, 97, 80, 0.28);
+      }
+      .btn-sage:hover {
+        background: var(--sage-deep);
+        box-shadow: 0 8px 28px rgba(61, 97, 80, 0.38);
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--sage);
+        border: 1.5px solid var(--sage);
+      }
+      .btn-outline:hover {
+        background: var(--sage);
+        color: var(--white);
+      }
+      .btn-outline-white {
+        background: transparent;
+        color: var(--white);
+        border: 1.5px solid rgba(255, 255, 255, 0.5);
+      }
+      .btn-outline-white:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .btn-white {
+        background: var(--white);
+        color: var(--sage-deep);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+      }
+      .btn-white:hover {
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+      }
+
+      /* ─── Scroll reveal ─── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.75s var(--ease),
+          transform 0.75s var(--ease);
+      }
+      .reveal.on {
+        opacity: 1;
+        transform: none;
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+
+      /* ════════════════════════════════════════
+         NAV
+      ════════════════════════════════════════ */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 20px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition:
+          background 0.35s,
+          padding 0.35s,
+          box-shadow 0.35s;
+      }
+      .nav.scrolled {
+        padding: 12px 40px;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(12px);
+        box-shadow:
+          0 1px 0 var(--line),
+          0 4px 24px rgba(0, 0, 0, 0.06);
+      }
+
+      .nav-brand {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: var(--white);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: color 0.3s;
+      }
+      .nav.scrolled .nav-brand {
+        color: var(--sage-deep);
+      }
+      .nav-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--sage-pale);
+        flex-shrink: 0;
+        transition: background 0.3s;
+      }
+      .nav.scrolled .nav-dot {
+        background: var(--sage-mid);
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .nav-links a {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.82);
+        padding: 7px 14px;
+        border-radius: 999px;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.18);
+        color: var(--white);
+      }
+      .nav.scrolled .nav-links a {
+        color: var(--ink-muted);
+      }
+      .nav.scrolled .nav-links a:hover {
+        background: var(--mist);
+        color: var(--sage-deep);
+      }
+
+      .nav-cta {
+        background: var(--sage) !important;
+        color: var(--white) !important;
+        padding: 9px 20px !important;
+      }
+      .nav-cta:hover {
+        background: var(--sage-deep) !important;
+      }
+
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--white);
+        border-radius: 2px;
+        transition:
+          transform 0.3s,
+          opacity 0.3s,
+          background 0.3s;
+      }
+      .nav.scrolled .nav-hamburger span {
+        background: var(--sage-deep);
+      }
+      .nav-hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .nav-hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* ════════════════════════════════════════
+         HERO
+      ════════════════════════════════════════ */
+      .hero {
+        min-height: 100svh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .hero-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          160deg,
+          rgba(21, 34, 28, 0.72) 0%,
+          rgba(33, 51, 40, 0.58) 50%,
+          rgba(61, 97, 80, 0.45) 100%
+        );
+      }
+      .hero-body {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 140px 24px 80px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+      .hero-eyebrow {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--sage-pale);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(200, 221, 191, 0.3);
+        border-radius: 999px;
+        padding: 6px 18px;
+        margin-bottom: 28px;
+      }
+      .hero h1 {
+        font-family: var(--font-serif);
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        font-weight: 400;
+        line-height: 1.08;
+        color: var(--white);
+        margin-bottom: 22px;
+        letter-spacing: -0.01em;
+      }
+      .hero-tagline {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 36px;
+      }
+      .hero-desc {
+        font-size: 1.05rem;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.8;
+        max-width: 52ch;
+        margin: 0 auto 44px;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero-scroll {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        animation: bounce 2.4s ease-in-out infinite;
+      }
+      .hero-scroll svg {
+        opacity: 0.5;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(8px);
+        }
+      }
+
+      /* ════════════════════════════════════════
+         PILLARS — S.A.G.E. strip
+      ════════════════════════════════════════ */
+      .pillars {
+        background: var(--sage-deep);
+        padding: 0;
+      }
+      .pillars-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .pillar {
+        padding: 44px 36px;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        transition: background 0.25s;
+      }
+      .pillar:last-child {
+        border-right: none;
+      }
+      .pillar:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .pillar-letter {
+        font-family: var(--font-serif);
+        font-size: 2.6rem;
+        color: var(--sage-pale);
+        opacity: 0.7;
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+      .pillar-name {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 6px;
+      }
+      .pillar-desc {
+        font-size: 0.83rem;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.65;
+      }
+
+      /* ════════════════════════════════════════
+         SECTION SHELL
+      ════════════════════════════════════════ */
+      .section {
+        padding: 110px 0;
+      }
+      .section.cream {
+        background: var(--cream);
+      }
+      .section.mist {
+        background: var(--mist);
+      }
+      .section.white {
+        background: var(--white);
+      }
+      .section.sage {
+        background: var(--sage);
+      }
+      .section.deep {
+        background: var(--sage-deep);
+      }
+
+      /* ════════════════════════════════════════
+         ABOUT — centred
+      ════════════════════════════════════════ */
+      .about-inner {
+        max-width: 780px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0 40px;
+      }
+      .about-inner h2 {
+        margin-bottom: 20px;
+      }
+      .about-inner .lead {
+        margin: 0 auto 20px;
+      }
+      .about-inner p {
+        max-width: 62ch;
+        margin: 0 auto;
+      }
+      .about-inner .btn {
+        margin-top: 36px;
+      }
+
+      /* ════════════════════════════════════════
+         FEATURES GRID
+      ════════════════════════════════════════ */
+      .section-head {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto 72px;
+      }
+      .section-head h2 {
+        margin-bottom: 16px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+
+      .feature-card {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+        transition:
+          box-shadow 0.25s var(--ease),
+          transform 0.25s var(--ease);
+      }
+      .feature-card:hover {
+        box-shadow: 0 20px 48px rgba(21, 34, 28, 0.1);
+        transform: translateY(-5px);
+      }
+      .feature-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+      }
+      .feature-body {
+        padding: 28px 28px 32px;
+      }
+      .feature-icon {
+        width: 44px;
+        height: 44px;
+        background: var(--mist);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        color: var(--sage);
+      }
+      .feature-title {
+        font-family: var(--font-serif);
+        font-size: 1.15rem;
+        color: var(--sage-deep);
+        margin-bottom: 10px;
+      }
+      .feature-text {
+        font-size: 0.88rem;
+        color: var(--ink-muted);
+        line-height: 1.75;
+        margin: 0;
+      }
+
+      /* ════════════════════════════════════════
+         GIVE BACK — full-bleed image + text overlay
+      ════════════════════════════════════════ */
+      .give-back {
+        position: relative;
+        min-height: 580px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+      .give-back-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .give-back-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(21, 34, 28, 0.88) 0%,
+          rgba(21, 34, 28, 0.55) 60%,
+          transparent 100%
+        );
+      }
+      .give-back-body {
+        position: relative;
+        z-index: 1;
+        max-width: 520px;
+        padding: 80px 80px;
+      }
+      .give-back-body h2 {
+        color: var(--white);
+        margin-bottom: 20px;
+      }
+      .give-back-body .lead {
+        color: rgba(255, 255, 255, 0.78);
+        margin-bottom: 16px;
+      }
+      .give-back-body p {
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .give-back-body .btn {
+        margin-top: 36px;
+      }
+
+      /* ════════════════════════════════════════
+         QUOTE BAND
+      ════════════════════════════════════════ */
+      .quote-band {
+        padding: 100px 40px;
+        text-align: center;
+      }
+      .quote-mark {
+        font-family: var(--font-serif);
+        font-size: 6rem;
+        line-height: 0.5;
+        color: var(--sage-pale);
+        margin-bottom: 24px;
+      }
+      .quote-text {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(1.4rem, 3vw, 2.1rem);
+        font-weight: 400;
+        color: var(--sage-deep);
+        line-height: 1.5;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+      .quote-attr {
+        display: inline-block;
+        margin-top: 28px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--sage-mid);
+      }
+
+      /* ════════════════════════════════════════
+         TEAM
+      ════════════════════════════════════════ */
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        margin-top: 64px;
+      }
+      .team-card {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+        transition:
+          box-shadow 0.25s var(--ease),
+          transform 0.25s var(--ease);
+      }
+      .team-card:hover {
+        box-shadow: 0 20px 48px rgba(21, 34, 28, 0.1);
+        transform: translateY(-5px);
+      }
+      .team-photo {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        object-position: top center;
+      }
+      .team-info {
+        padding: 32px 36px 36px;
+      }
+      .team-role {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+        display: block;
+      }
+      .team-name {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: var(--sage-deep);
+        margin-bottom: 14px;
+      }
+      .team-bio {
+        font-size: 0.92rem;
+        color: var(--ink-muted);
+        line-height: 1.78;
+        margin: 0;
+      }
+      .team-bio + .team-bio {
+        margin-top: 10px;
+      }
+      .team-soon {
+        display: inline-block;
+        margin-top: 16px;
+        font-size: 0.78rem;
+        font-style: italic;
+        color: var(--sage-light);
+        padding: 6px 14px;
+        background: var(--mist);
+        border-radius: 999px;
+      }
+      .team-footer-note {
+        text-align: center;
+        margin-top: 48px;
+        max-width: 62ch;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.95rem;
+        color: var(--ink-muted);
+      }
+
+      /* ════════════════════════════════════════
+         EVENTS & PROJECTS — cards with image
+      ════════════════════════════════════════ */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        margin-top: 64px;
+      }
+      .info-card {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+        transition:
+          box-shadow 0.25s var(--ease),
+          transform 0.25s var(--ease);
+      }
+      .info-card:hover {
+        box-shadow: 0 20px 48px rgba(21, 34, 28, 0.1);
+        transform: translateY(-5px);
+      }
+      .info-card-img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        object-position: center;
+      }
+      .info-card-body {
+        padding: 32px 32px 36px;
+      }
+      .info-card-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 12px;
+        display: block;
+      }
+      .info-card-title {
+        font-family: var(--font-serif);
+        font-size: 1.45rem;
+        font-weight: 400;
+        color: var(--sage-deep);
+        margin-bottom: 14px;
+      }
+      .info-card-text {
+        font-size: 0.9rem;
+        color: var(--ink-muted);
+        line-height: 1.78;
+        margin: 0;
+      }
+      .info-card-tbc {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--sage-mid);
+        background: var(--mist);
+        border-radius: 999px;
+        padding: 7px 16px;
+      }
+
+      /* ════════════════════════════════════════
+         CONTACT
+      ════════════════════════════════════════ */
+      .contact-section {
+        background:
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(122, 158, 126, 0.12) 0%,
+            transparent 60%
+          ),
+          var(--sage-deep);
+        padding: 110px 40px;
+        text-align: center;
+      }
+      .contact-wrap {
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      .contact-section h2 {
+        color: var(--white);
+      }
+      .contact-section .lead {
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0 auto 36px;
+      }
+
+      .contact-email-link {
+        display: inline-block;
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: var(--sage-pale);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(200, 221, 191, 0.35);
+        padding-bottom: 4px;
+        margin-bottom: 56px;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .contact-email-link:hover {
+        color: var(--white);
+        border-color: rgba(200, 221, 191, 0.7);
+      }
+
+      .signup-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--sage-pale);
+        opacity: 0.6;
+        margin-bottom: 16px;
+      }
+      .signup-form {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 16px;
+      }
+      .signup-input {
+        flex: 1;
+        min-width: 220px;
+        padding: 14px 22px;
+        border: 1.5px solid rgba(200, 221, 191, 0.25);
+        border-radius: 999px;
+        font-family: var(--font-sans);
+        font-size: 0.9rem;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--white);
+        outline: none;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .signup-input::placeholder {
+        color: rgba(255, 255, 255, 0.35);
+      }
+      .signup-input:focus {
+        border-color: var(--sage-pale);
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .signup-success {
+        display: none;
+        margin-top: 18px;
+        font-size: 0.9rem;
+        font-style: italic;
+        color: var(--sage-pale);
+      }
+
+      /* ════════════════════════════════════════
+         FOOTER
+      ════════════════════════════════════════ */
+      footer {
+        background: var(--sage-deep);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 44px 40px;
+      }
+      .footer-inner {
+        max-width: var(--max);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .footer-brand {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+        color: var(--sage-pale);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        opacity: 0.7;
+      }
+      .footer-tagline {
+        font-size: 0.82rem;
+        font-style: italic;
+        color: rgba(200, 221, 191, 0.4);
+      }
+      .footer-copy {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.22);
+      }
+
+      /* ════════════════════════════════════════
+         RESPONSIVE
+      ════════════════════════════════════════ */
+      @media (max-width: 1000px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .pillars-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .pillar:nth-child(2) {
+          border-right: none;
+        }
+        .pillar:nth-child(3) {
+          border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+        .give-back-body {
+          padding: 72px 60px;
+          max-width: 480px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Nav */
+        .wrap {
+          padding: 0 20px;
+        }
+        .nav {
+          padding: 14px 20px;
+        }
+        .nav.scrolled {
+          padding: 10px 20px;
+        }
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          background: var(--white);
+          padding: 8px 0 16px;
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+          border-top: 1px solid var(--line);
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-links a {
+          color: var(--ink-muted) !important;
+          padding: 12px 24px;
+          border-radius: 0;
+          width: 100%;
+          font-size: 0.95rem;
+        }
+        .nav-links a:hover {
+          background: var(--mist) !important;
+          color: var(--sage-deep) !important;
+        }
+        .nav-cta {
+          margin: 8px 20px 4px !important;
+          border-radius: 999px !important;
+          text-align: center;
+          width: calc(100% - 40px) !important;
+          justify-content: center;
+        }
+        .nav-hamburger {
+          display: flex;
+        }
+
+        /* Hero */
+        .hero {
+          min-height: 100svh;
+        }
+        .hero-body {
+          padding: 110px 20px 80px;
+        }
+        .hero h1 {
+          font-size: clamp(2.4rem, 11vw, 3.4rem);
+        }
+        .hero-tagline {
+          font-size: 1.05rem;
+        }
+        .hero-desc {
+          font-size: 0.95rem;
+        }
+        .hero-actions {
+          gap: 12px;
+        }
+
+        /* Pillars */
+        .pillars-grid {
+          grid-template-columns: 1fr;
+        }
+        .pillar {
+          border-right: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 32px 24px;
+        }
+        .pillar:last-child {
+          border-bottom: none;
+        }
+
+        /* About */
+        .about-inner {
+          padding: 0 20px;
+        }
+
+        /* Sections */
+        .section {
+          padding: 72px 0;
+        }
+        .section-head {
+          margin-bottom: 48px;
+        }
+
+        /* Features */
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        /* Give back */
+        .give-back {
+          min-height: 520px;
+        }
+        .give-back-overlay {
+          background: linear-gradient(
+            180deg,
+            rgba(21, 34, 28, 0.65) 0%,
+            rgba(21, 34, 28, 0.82) 100%
+          );
+        }
+        .give-back-body {
+          padding: 52px 24px;
+          max-width: 100%;
+        }
+
+        /* Team */
+        .team-card {
+          flex-direction: column;
+        }
+        .team-photo {
+          height: 260px;
+        }
+        .team-info {
+          padding: 24px 24px 28px;
+        }
+
+        /* Cards */
+        .cards-grid {
+          gap: 20px;
+        }
+        .info-card-img {
+          height: 220px;
+        }
+        .info-card-body {
+          padding: 24px 24px 28px;
+        }
+
+        /* Quote */
+        .quote-band {
+          padding: 72px 24px;
+        }
+        .quote-text {
+          font-size: clamp(1.15rem, 4vw, 1.5rem);
+        }
+
+        /* Contact */
+        .contact-section {
+          padding: 80px 20px;
+        }
+        .contact-email-link {
+          font-size: 1.1rem;
+          word-break: break-all;
+        }
+        .signup-form {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .signup-input {
+          min-width: 0;
+          width: 100%;
+        }
+
+        /* Footer */
+        footer {
+          padding: 32px 20px;
+        }
+        .footer-inner {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .hero-actions .btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .pillar-letter {
+          font-size: 2rem;
+        }
+        .feature-body {
+          padding: 20px 20px 24px;
+        }
+        .team-photo {
+          height: 220px;
+        }
+        .section-head {
+          padding: 0 4px;
+        }
+        .quote-mark {
+          font-size: 4rem;
+        }
+        h2 {
+          font-size: clamp(1.6rem, 6vw, 2.2rem);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ══ NAV ══════════════════════════════════════════ -->
+    <nav class="nav" id="nav" aria-label="Main navigation">
+      <a href="#" class="nav-brand">
+        <span class="nav-dot"></span>
+        Sage Connection
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#connect">Connect</a></li>
+        <li><a href="#team">Our Founders</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+      </ul>
+      <button
+        class="nav-hamburger"
+        id="hamburger"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- ══ HERO ═════════════════════════════════════════ -->
+    <section class="hero">
+      <img
+        class="hero-img"
+        src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2200&q=80"
+        alt="Women in community gathering"
+      />
+      <div class="hero-overlay"></div>
+      <div class="hero-body">
+        <span class="hero-eyebrow"
+          >Support · Advice · Guidance · Experience</span
+        >
+        <h1>Sage Connection</h1>
+        <p class="hero-tagline">Community. Connection. Continuation.</p>
+        <p class="hero-desc">
+          A vibrant community of experienced women connecting, supporting, and
+          empowering one another as we transition from professional life into a
+          new phase of meaningful contribution.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-white">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m2 7 10 7 10-7" />
+            </svg>
+            Join Mailing List
+          </a>
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline-white"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+              />
+            </svg>
+            Follow on Facebook
+          </a>
+        </div>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M12 5v14M5 12l7 7 7-7" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ══ SAGE PILLARS ══════════════════════════════════ -->
+    <div class="pillars">
+      <div class="pillars-grid">
+        <div class="pillar reveal">
+          <div class="pillar-letter">S</div>
+          <div class="pillar-name">Support</div>
+          <div class="pillar-desc">
+            A caring network that holds you through every transition
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-1">
+          <div class="pillar-letter">A</div>
+          <div class="pillar-name">Advice</div>
+          <div class="pillar-desc">
+            Trusted guidance from women who understand your journey
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-2">
+          <div class="pillar-letter">G</div>
+          <div class="pillar-name">Guidance</div>
+          <div class="pillar-desc">
+            Mentoring and direction to shape your next chapter
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-3">
+          <div class="pillar-letter">E</div>
+          <div class="pillar-name">Experience</div>
+          <div class="pillar-desc">
+            Decades of wisdom shared, honoured, and put to work
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ABOUT ════════════════════════════════════════ -->
+    <section class="section white" id="about">
+      <div class="about-inner reveal">
+        <span class="eyebrow">Our Purpose</span>
+        <h2>Connecting Women,<br />Creating Impact</h2>
+        <p class="lead">
+          Sage Connection is a community united by a shared purpose: to stay
+          connected, feel valued, and continue contributing in ways that matter.
+        </p>
+        <p>
+          Grounded in
+          <strong>Support, Advice, Guidance, and Experience</strong>, Sage
+          provides a space where women's wisdom is recognised, shared, and put
+          into action. Together we continue to make a difference — uplifting
+          each other and the communities we live in.
+        </p>
+        <a href="#connect" class="btn btn-outline">How We Connect</a>
+      </div>
+    </section>
+
+    <!-- ══ HOW WE CONNECT — feature cards ═══════════════ -->
+    <section class="section mist" id="connect">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Community</span>
+          <h2>How We Connect Women</h2>
+          <p class="lead" style="margin: 0 auto; text-align: center">
+            Through meaningful gatherings, mentoring, and shared purpose, we
+            build relationships that last a lifetime.
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <img
+              class="feature-img"
+              src="https://images.unsplash.com/photo-1543269664-7eef42226a21?auto=format&fit=crop&w=800&q=80"
+              alt="Women in small group conversation"
+            />
+            <div class="feature-body">
+              <h3 class="feature-title">Small Group Conversations</h3>
+              <p class="feature-text">
+                Build meaningful relationships through intimate group
+                conversations, mentoring circles, and shared-interest forums.
+              </p>
+            </div>
+          </div>
+          <div class="feature-card reveal reveal-delay-1">
+            <img
+              class="feature-img"
+              src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80"
+              alt="Women supporting each other"
+            />
+            <div class="feature-body">
+              <h3 class="feature-title">Peer Support &amp; Lived Experience</h3>
+              <p class="feature-text">
+                Share lived experience and compassionate peer support during
+                life's most meaningful transitions.
+              </p>
+            </div>
+          </div>
+          <div class="feature-card reveal reveal-delay-2">
+            <img
+              class="feature-img"
+              src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80"
+              alt="Women at a community gathering"
+            />
+            <div class="feature-body">
+              <h3 class="feature-title">Stay Active &amp; Engaged</h3>
+              <p class="feature-text">
+                Remain active, inspired, and genuinely valued within a community
+                that celebrates your experience and contribution.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ GIVE BACK — full bleed image ══════════════════ -->
+    <section class="give-back" id="give-back">
+      <img
+        class="give-back-img"
+        src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=2200&q=80"
+        alt="Women collaborating in community"
+      />
+      <div class="give-back-overlay"></div>
+      <div class="give-back-body reveal">
+        <span class="eyebrow light">Contribution</span>
+        <h2>Creating Opportunities<br />to Give Back</h2>
+        <p class="lead">
+          Through collaboration and collective action, Sage members identify
+          community needs and design achievable, meaningful projects.
+        </p>
+        <p>
+          Members contribute skills, leadership, and time through mentoring,
+          workshops, advisory roles, and intergenerational initiatives.
+        </p>
+        <a href="#contact" class="btn btn-outline-white">Get Involved</a>
+      </div>
+    </section>
+
+    <!-- ══ QUOTE BAND ════════════════════════════════════ -->
+    <div class="quote-band cream reveal">
+      <div class="quote-mark" aria-hidden="true">"</div>
+      <blockquote class="quote-text">
+        By fostering authentic relationships and real opportunities to give
+        back, Sage Connection creates lasting impact — strengthening women,
+        communities, and future generations.
+      </blockquote>
+      <cite class="quote-attr">The Sage Connection Mission</cite>
+    </div>
+
+    <!-- ══ TEAM ══════════════════════════════════════════ -->
+    <section class="section white" id="team">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Our Founders</span>
+          <h2>Who We Are</h2>
+          <p class="lead" style="margin: 0 auto; text-align: center">
+            Led by women who believe deeply in the power of connection,
+            experience, and contribution.
+          </p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <img
+              class="team-photo"
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80"
+              alt="Portrait placeholder for Wendy Cheney"
+            />
+            <div class="team-info">
+              <span class="team-role">Director &amp; Co-Founder</span>
+              <h3 class="team-name">Wendy Cheney</h3>
+              <p class="team-bio">
+                Wendy brings strategic leadership and a strong commitment to
+                creating structures that allow experienced women to remain
+                connected, valued, and impactful.
+              </p>
+              <span class="team-soon">Personal bio coming soon</span>
+            </div>
+          </div>
+          <div class="team-card reveal reveal-delay-1">
+            <img
+              class="team-photo"
+              src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80"
+              alt="Portrait placeholder for Kris Faithfull"
+            />
+            <div class="team-info">
+              <span class="team-role">Community Lead &amp; Co-Founder</span>
+              <h3 class="team-name">Kris Faithfull</h3>
+              <p class="team-bio">
+                Kris is passionate about building inclusive, supportive
+                environments where women feel seen, heard, and encouraged to
+                continue sharing their wisdom and skills.
+              </p>
+              <span class="team-soon">Personal bio coming soon</span>
+            </div>
+          </div>
+        </div>
+        <p class="team-footer-note reveal">
+          Together, Wendy and Kris founded Sage Connection to create a welcoming
+          community where experience is honoured and continues to serve the
+          wider community.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══ EVENTS & PROJECTS ══════════════════════════════ -->
+    <section class="section cream" id="events">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Stay Connected</span>
+          <h2>Events &amp; Projects</h2>
+          <p class="lead" style="margin: 0 auto; text-align: center">
+            Gatherings and initiatives designed to inform, inspire, and create
+            real impact together.
+          </p>
+        </div>
+        <div class="cards-grid">
+          <div class="info-card reveal" id="events-card">
+            <img
+              class="info-card-img"
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=80"
+              alt="Community event space"
+            />
+            <div class="info-card-body">
+              <span class="info-card-label">Upcoming Events</span>
+              <h3 class="info-card-title">Gatherings That Bring Us Together</h3>
+              <p class="info-card-text">
+                Our events create space for meaningful conversation, shared
+                learning, and connection. From mentoring circles to workshops
+                and community gatherings, each event offers an opportunity to
+                engage and reflect.
+              </p>
+              <span class="info-card-tbc">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v4l3 3" />
+                </svg>
+                Next event: date to be confirmed
+              </span>
+            </div>
+          </div>
+          <div class="info-card reveal reveal-delay-1" id="projects">
+            <img
+              class="info-card-img"
+              src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=1000&q=80"
+              alt="Community project collaboration"
+            />
+            <div class="info-card-body">
+              <span class="info-card-label">Projects on the Go</span>
+              <h3 class="info-card-title">Real Impact Created Together</h3>
+              <p class="info-card-text">
+                Working alongside local organisations and community partners,
+                Sage members collaborate on initiatives that make a genuine
+                difference — contributing time, insight, and leadership in ways
+                that are purposeful.
+              </p>
+              <span class="info-card-tbc">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v4l3 3" />
+                </svg>
+                Projects: details coming soon
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CONTACT ═══════════════════════════════════════ -->
+    <section class="contact-section" id="contact">
+      <div class="contact-wrap reveal">
+        <span class="eyebrow light">Reach Out</span>
+        <h2>Get in Touch</h2>
+        <p class="lead">
+          We welcome enquiries from women interested in joining Sage Connection,
+          as well as from organisations and partners who share our values.
+        </p>
+        <a href="mailto:hello@sageconnection.com.au" class="contact-email-link">
+          hello@sageconnection.com.au
+        </a>
+        <p class="signup-label">Sign up for news &amp; events</p>
+        <form class="signup-form" onsubmit="handleSignup(event)">
+          <input
+            type="email"
+            class="signup-input"
+            placeholder="Your email address"
+            required
+            aria-label="Email address"
+          />
+          <button type="submit" class="btn btn-white">
+            Join Our Community
+          </button>
+        </form>
+        <p class="signup-success" id="signup-success">
+          Thank you — we'll be in touch soon.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══ FOOTER ════════════════════════════════════════ -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span
+            style="
+              width: 7px;
+              height: 7px;
+              border-radius: 50%;
+              background: var(--sage-pale);
+              opacity: 0.6;
+              display: inline-block;
+              flex-shrink: 0;
+            "
+          ></span>
+          Sage Connection
+        </div>
+        <p class="footer-tagline">Community. Connection. Continuation.</p>
+        <p class="footer-copy">
+          &copy; 2026 Sage Connection. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Nav: scroll state
+      const nav = document.getElementById("nav");
+      window.addEventListener(
+        "scroll",
+        () => {
+          nav.classList.toggle("scrolled", window.scrollY > 60);
+        },
+        { passive: true },
+      );
+
+      // Nav: mobile toggle
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
+      hamburger.addEventListener("click", () => {
+        const open = navLinks.classList.toggle("open");
+        hamburger.classList.toggle("open", open);
+        hamburger.setAttribute("aria-expanded", open);
+      });
+      navLinks.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          hamburger.classList.remove("open");
+          hamburger.setAttribute("aria-expanded", false);
+        }),
+      );
+
+      // Scroll reveal
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("on");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Signup form
+      function handleSignup(e) {
+        e.preventDefault();
+        document.getElementById("signup-success").style.display = "block";
+        e.target.reset();
+      }
+    </script>
+  </body>
+</html>
