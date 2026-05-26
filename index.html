@@ -799,6 +799,251 @@
       }
 
       /* ════════════════════════════════════════
+         EXAMPLE PROJECT
+      ════════════════════════════════════════ */
+      .project-showcase {
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(122, 158, 126, 0.14) 0%,
+            transparent 34%
+          ),
+          linear-gradient(180deg, #f9f6f0 0%, #f4efe5 100%);
+      }
+      .project-shell {
+        align-items: center;
+      }
+      .project-preview {
+        position: relative;
+      }
+      .project-preview::before {
+        content: "";
+        position: absolute;
+        inset: 22px -18px -22px 80px;
+        border-radius: 28px;
+        background: linear-gradient(
+          135deg,
+          rgba(184, 145, 106, 0.16),
+          rgba(61, 97, 80, 0.08)
+        );
+        z-index: 0;
+      }
+      .project-browser {
+        position: relative;
+        z-index: 1;
+        background: #fcfaf6;
+        border: 1px solid rgba(33, 51, 40, 0.1);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 26px 70px rgba(33, 51, 40, 0.12);
+      }
+      .project-browser-bar {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 18px;
+        background: rgba(255, 255, 255, 0.8);
+        border-bottom: 1px solid rgba(33, 51, 40, 0.08);
+      }
+      .project-browser-dots {
+        display: inline-flex;
+        gap: 6px;
+      }
+      .project-browser-dots span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(61, 97, 80, 0.24);
+      }
+      .project-browser-url {
+        flex: 1;
+        min-width: 0;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: var(--white);
+        border: 1px solid rgba(33, 51, 40, 0.08);
+        font-size: 0.76rem;
+        color: var(--ink-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .project-browser-body {
+        display: grid;
+        gap: 24px;
+        padding: 28px;
+      }
+      .project-hero-panel {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        padding: 32px;
+        min-height: 300px;
+        background:
+          linear-gradient(
+            155deg,
+            rgba(21, 34, 28, 0.92) 0%,
+            rgba(45, 74, 45, 0.86) 52%,
+            rgba(122, 158, 126, 0.82) 100%
+          ),
+          url("https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=80")
+            center / cover;
+        color: var(--white);
+      }
+      .project-hero-panel::after {
+        content: "";
+        position: absolute;
+        inset: auto -50px -50px auto;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        filter: blur(4px);
+      }
+      .project-kicker {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .project-preview-title {
+        position: relative;
+        z-index: 1;
+        font-family: var(--font-serif);
+        font-size: clamp(2rem, 4vw, 2.9rem);
+        font-weight: 400;
+        line-height: 1.05;
+        margin: 18px 0 14px;
+        max-width: 10ch;
+      }
+      .project-preview-copy {
+        position: relative;
+        z-index: 1;
+        max-width: 36ch;
+        font-size: 0.94rem;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .project-service-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .project-service-card {
+        background: var(--white);
+        border: 1px solid rgba(33, 51, 40, 0.08);
+        border-radius: 18px;
+        padding: 18px;
+      }
+      .project-service-card strong {
+        display: block;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--sage-mid);
+        margin-bottom: 8px;
+      }
+      .project-service-card p {
+        font-size: 0.84rem;
+        line-height: 1.7;
+        color: var(--ink-muted);
+      }
+      .project-content {
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(33, 51, 40, 0.08);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 20px 48px rgba(33, 51, 40, 0.08);
+      }
+      .project-content h2 {
+        margin-bottom: 16px;
+      }
+      .project-summary {
+        margin-bottom: 24px;
+      }
+      .project-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 28px 0 24px;
+      }
+      .project-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: var(--white);
+        border: 1px solid rgba(61, 97, 80, 0.12);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--sage-deep);
+      }
+      .project-highlights {
+        list-style: none;
+        display: grid;
+        gap: 14px;
+        margin: 0 0 28px;
+      }
+      .project-highlights li {
+        position: relative;
+        padding-left: 22px;
+        font-size: 0.93rem;
+        line-height: 1.8;
+        color: var(--ink-muted);
+      }
+      .project-highlights li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.78em;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+        transform: translateY(-50%);
+      }
+      .project-meta {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+      .project-meta-item {
+        padding: 16px 18px;
+        background: var(--mist);
+        border-radius: 18px;
+      }
+      .project-meta-label {
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--sage-mid);
+        margin-bottom: 7px;
+      }
+      .project-meta-value {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+        color: var(--sage-deep);
+      }
+      .project-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      /* ════════════════════════════════════════
          CONTACT
       ════════════════════════════════════════ */
       .contact-section {
@@ -946,6 +1191,12 @@
         .cards-grid {
           grid-template-columns: 1fr;
         }
+        .project-shell {
+          grid-template-columns: 1fr;
+        }
+        .project-meta {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
         .give-back-body {
           padding: 72px 60px;
           max-width: 480px;
@@ -1090,6 +1341,32 @@
           padding: 24px 24px 28px;
         }
 
+        /* Example project */
+        .project-browser-body {
+          padding: 20px;
+        }
+        .project-hero-panel {
+          min-height: 240px;
+          padding: 24px;
+        }
+        .project-service-grid {
+          grid-template-columns: 1fr;
+        }
+        .project-content {
+          padding: 28px 24px;
+        }
+        .project-meta {
+          grid-template-columns: 1fr;
+        }
+        .project-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .project-actions .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
         /* Quote */
         .quote-band {
           padding: 72px 24px;
@@ -1144,6 +1421,9 @@
         }
         .team-photo {
           height: 220px;
+        }
+        .project-preview::before {
+          inset: 18px -10px -18px 26px;
         }
         .section-head {
           padding: 0 4px;
@@ -1319,8 +1599,8 @@
     <section class="hero">
       <img
         class="hero-img"
-        src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2200&q=80"
-        alt="Women in community gathering"
+        src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=2200&q=80"
+        alt="Mature women eco-architects collaborating with models and blueprints in an office"
       />
       <div class="hero-overlay"></div>
       <div class="hero-body">
@@ -1438,7 +1718,6 @@
           into action. Together we continue to make a difference — uplifting
           each other and the communities we live in.
         </p>
-        <a href="#connect" class="btn btn-outline">How We Connect</a>
       </div>
     </section>
 
@@ -1549,18 +1828,33 @@
           <div class="team-card reveal">
             <img
               class="team-photo"
-              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80"
-              alt="Portrait placeholder for Wendy Cheney"
+              src="wendy-profile.jpg"
+              alt="Wendy Cheney sitting on rocks outdoors"
+              style="
+                object-fit: cover;
+                object-position: 0% 20%;
+                width: 100%;
+                height: 340px;
+                border-radius: 18px;
+                background: #f5f0e8;
+              "
             />
             <div class="team-info">
               <span class="team-role">Director &amp; Co-Founder</span>
               <h3 class="team-name">Wendy Cheney</h3>
               <p class="team-bio">
-                Wendy brings strategic leadership and a strong commitment to
-                creating structures that allow experienced women to remain
-                connected, valued, and impactful.
+                Wendy enjoyed a long and rewarding career as a Clinical
+                Professor in Pediatric Dentistry, where she combined clinical
+                expertise with a passion for teaching, mentoring, and supporting
+                the next generation of health professionals. Today, she is
+                embracing a new direction as a co-founder of Sage Connection, a
+                women’s community focused on connection, engagement, and
+                purposeful contribution. Inspired by the belief that experience,
+                wisdom, and relationships matter deeply at every stage of life,
+                she is helping to build a welcoming space for women to form
+                meaningful connections, share ideas, and participate in
+                community-focused initiatives.
               </p>
-              <span class="team-soon">Personal bio coming soon</span>
             </div>
           </div>
           <div class="team-card reveal reveal-delay-1">
@@ -1575,9 +1869,9 @@
               <p class="team-bio">
                 Kris is passionate about building inclusive, supportive
                 environments where women feel seen, heard, and encouraged to
-                continue sharing their wisdom and skills.
+                continue sharing their wisdom and skills. (Kris, please add your
+                own bio here and send to Sam for upload.)
               </p>
-              <span class="team-soon">Personal bio coming soon</span>
             </div>
           </div>
         </div>
@@ -1589,12 +1883,12 @@
       </div>
     </section>
 
-    <!-- ══ EVENTS & PROJECTS ══════════════════════════════ -->
+    <!-- ══ EVENTS & COMMUNITY INITIATIVES ═════════════════ -->
     <section class="section cream" id="events">
       <div class="wrap">
         <div class="section-head reveal">
           <span class="eyebrow">Stay Connected</span>
-          <h2>Events &amp; Projects</h2>
+          <h2>Events &amp; Community Initiatives</h2>
           <p class="lead" style="margin: 0 auto; text-align: center">
             Gatherings and initiatives designed to inform, inspire, and create
             real impact together.
@@ -1633,39 +1927,43 @@
               </span>
             </div>
           </div>
-          <div class="info-card reveal reveal-delay-1" id="projects">
-            <img
-              class="info-card-img"
-              src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=1000&q=80"
-              alt="Community project collaboration"
-            />
-            <div class="info-card-body">
-              <span class="info-card-label">Projects on the Go</span>
-              <h3 class="info-card-title">Real Impact Created Together</h3>
-              <p class="info-card-text">
-                Working alongside local organisations and community partners,
-                Sage members collaborate on initiatives that make a genuine
-                difference — contributing time, insight, and leadership in ways
-                that are purposeful.
-              </p>
-              <span class="info-card-tbc">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 8v4l3 3" />
-                </svg>
-                Projects: details coming soon
-              </span>
-            </div>
-          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ══ EXAMPLE PROJECT (SHORT) ══════════════════════ -->
+    <section class="section white project-showcase" id="projects">
+      <div class="wrap">
+          <div class="wrap" style="max-width: none; padding: 0;">
+            <a href="https://followmetherapy.com.au/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block; width: 100%;">
+              <div class="project-shell" style="max-width: 100vw;">
+                <div class="project-preview reveal" style="width: 100%;">
+                  <div
+                    class="project-browser"
+                    aria-label="Preview card for Follow Me Therapy website"
+                    style="width: 100%; cursor: pointer;"
+                  >
+                    <div class="project-browser-bar">
+                      <div class="project-browser-dots" aria-hidden="true">
+                        <span></span><span></span><span></span>
+                      </div>
+                      <div class="project-browser-url">followmetherapy.com.au</div>
+                    </div>
+                    <div class="project-browser-body">
+                      <div class="project-hero-panel">
+                        <div class="project-kicker">Example Project</div>
+                        <h3 class="project-preview-title">Follow Me Therapy</h3>
+                        <p class="project-preview-copy">
+                          A friendly, family-focused occupational therapy site for
+                          children and young people. Clear info, easy contact, and
+                          accessible support.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
       </div>
     </section>
 
