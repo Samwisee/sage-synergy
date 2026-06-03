@@ -799,6 +799,69 @@
         padding: 7px 16px;
       }
 
+      .project-dialog {
+        width: min(920px, calc(100% - 28px));
+        border: none;
+        border-radius: 22px;
+        padding: 0;
+        overflow: hidden;
+        box-shadow: 0 28px 90px rgba(21, 34, 28, 0.32);
+      }
+      .project-dialog[open] {
+        margin: 0;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .project-dialog::backdrop {
+        background: rgba(18, 29, 23, 0.62);
+      }
+      .project-dialog-layout {
+        display: grid;
+        grid-template-columns: 320px minmax(0, 1fr);
+        min-height: 420px;
+        background: var(--white);
+      }
+      .project-dialog-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        background: var(--cream-dark);
+      }
+      .project-dialog-content {
+        padding: 32px;
+      }
+      .project-dialog-kicker {
+        display: inline-block;
+        margin-bottom: 12px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .project-dialog-title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--sage-deep);
+        margin-bottom: 14px;
+      }
+      .project-dialog-text {
+        font-size: 0.94rem;
+        line-height: 1.82;
+        color: var(--ink-muted);
+      }
+      .project-dialog-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
       /* ════════════════════════════════════════
          EXAMPLE PROJECT
       ════════════════════════════════════════ */
@@ -1340,6 +1403,15 @@
         }
         .info-card-body {
           padding: 24px 24px 28px;
+        }
+        .project-dialog-layout {
+          grid-template-columns: 1fr;
+        }
+        .project-dialog-photo {
+          max-height: 300px;
+        }
+        .project-dialog-content {
+          padding: 24px;
         }
 
         /* Example project */
@@ -1888,7 +1960,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <span class="eyebrow">Stay Connected</span>
-          <h2>Events &amp; Community Initiatives</h2>
+          <h2>Projects on the Go</h2>
           <p class="lead" style="margin: 0 auto; text-align: center">
             Gatherings and initiatives designed to inform, inspire, and create
             real impact together.
@@ -1941,20 +2013,60 @@
                 service supporting children and young people. Explore their
                 clear resources and practical support for everyday growth.
               </p>
-              <a
-                href="https://followmetherapy.com.au/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                id="open-fmt-dialog"
                 class="btn btn-outline"
                 style="margin-top: 20px"
               >
-                Visit Follow Me Therapy
-              </a>
+                View Sage Contribution
+              </button>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <dialog
+      class="project-dialog"
+      id="fmt-dialog"
+      aria-labelledby="fmt-dialog-title"
+    >
+      <div class="project-dialog-layout">
+        <img
+          class="project-dialog-photo"
+          src="sim-profile.png"
+          alt="Simone from Follow Me Therapy"
+        />
+        <div class="project-dialog-content">
+          <span class="project-dialog-kicker">Projects on the Go</span>
+          <h3 class="project-dialog-title" id="fmt-dialog-title">
+            Follow Me Therapy
+          </h3>
+          <p class="project-dialog-text">
+            Sage Connection provides highly practical, non-clinical assistance
+            to a start-up small business in occupational therapy: Follow Me
+            Therapy. Sage Connection provides ongoing assistance with day-to-day
+            workplace process documentation and auditing. Our contribution
+            allows Simone, the owner of the practice, to focus on client care
+            and building a sustainable community-focused private practice.
+          </p>
+          <div class="project-dialog-actions">
+            <a
+              href="https://followmetherapy.com.au/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-sage"
+            >
+              Learn More About Sim's Business
+            </a>
+            <button type="button" class="btn btn-outline" id="close-fmt-dialog">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </dialog>
 
     <!-- ══ CONTACT ═══════════════════════════════════════ -->
     <section class="contact-section" id="contact">
@@ -2068,6 +2180,34 @@
         e.preventDefault();
         document.getElementById("signup-success").style.display = "block";
         e.target.reset();
+      }
+
+      // Follow Me Therapy dialog
+      const fmtDialog = document.getElementById("fmt-dialog");
+      const openFmtDialog = document.getElementById("open-fmt-dialog");
+      const closeFmtDialog = document.getElementById("close-fmt-dialog");
+
+      if (fmtDialog && openFmtDialog && closeFmtDialog) {
+        openFmtDialog.addEventListener("click", () => {
+          fmtDialog.showModal();
+        });
+
+        closeFmtDialog.addEventListener("click", () => {
+          fmtDialog.close();
+        });
+
+        fmtDialog.addEventListener("click", (event) => {
+          const rect = fmtDialog.getBoundingClientRect();
+          const isInside =
+            event.clientX >= rect.left &&
+            event.clientX <= rect.right &&
+            event.clientY >= rect.top &&
+            event.clientY <= rect.bottom;
+
+          if (!isInside) {
+            fmtDialog.close();
+          }
+        });
       }
     </script>
   </body>
