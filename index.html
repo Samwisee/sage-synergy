@@ -2235,9 +2235,9 @@
                 Please reach out to us via the contact form on this page or
                 email us directly at
                 <a
-                  href="mailto:hello@sageconnection.com.au"
+                  href="mailto:info.sageconnection@gmail.com"
                   style="color: var(--sage)"
-                  >hello@sageconnection.com.au</a
+                  >info.sageconnection@gmail.com</a
                 >
                 and let us know a little about what you are looking for. We will
                 do our best to make a meaningful match.
@@ -2692,13 +2692,14 @@
           We welcome enquiries from women interested in joining Sage Connection,
           as well as from organisations and partners who share our values.
         </p>
-        <a href="mailto:hello@sageconnection.com.au" class="contact-email-link">
-          hello@sageconnection.com.au
+        <a href="mailto:info.sageconnection@gmail.com" class="contact-email-link">
+          info.sageconnection@gmail.com
         </a>
         <p class="signup-label">Sign up for news &amp; events</p>
         <form class="signup-form" onsubmit="handleSignup(event)">
           <input
             type="email"
+            name="email"
             class="signup-input"
             placeholder="Your email address"
             required
@@ -2823,22 +2824,79 @@
       });
 
       // Signup form
-      function handleSignup(e) {
+      // Form submissions are emailed straight to Sage Connection's inbox
+      // through FormSubmit (https://formsubmit.co).
+      const INBOX = "info.sageconnection@gmail.com";
+
+      async function sendToInbox(subject, fields) {
+        const res = await fetch("https://formsubmit.co/ajax/" + INBOX, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: subject,
+            _template: "table",
+            _captcha: "false",
+            ...fields,
+          }),
+        });
+        if (!res.ok) throw new Error("Send failed");
+      }
+
+      // Mailing list sign-up
+      async function handleSignup(e) {
         e.preventDefault();
-        document.getElementById("signup-success").style.display = "block";
-        e.target.reset();
+        const form = e.target;
+        const button = form.querySelector("button");
+        const email = form.querySelector('input[name="email"]').value;
+        button.disabled = true;
+        try {
+          await sendToInbox("New mailing list sign-up", {
+            email,
+            _replyto: email,
+          });
+          document.getElementById("signup-success").style.display = "block";
+          form.reset();
+        } catch (err) {
+          alert(
+            "Sorry, that didn't go through. Please email us at " + INBOX + "."
+          );
+        } finally {
+          button.disabled = false;
+        }
       }
 
       // Join / membership form
-      function handleJoin(e) {
+      async function handleJoin(e) {
         e.preventDefault();
         const consent = document.getElementById("join-consent");
         if (!consent.checked) {
           consent.focus();
           return;
         }
-        document.getElementById("join-success").style.display = "block";
-        e.target.reset();
+        const form = e.target;
+        const button = form.querySelector('button[type="submit"]');
+        // Gather every field, joining ticked boxes into one line each.
+        const data = new FormData(form);
+        const fields = {};
+        for (const [key, value] of data.entries()) {
+          fields[key] = fields[key] ? fields[key] + ", " + value : value;
+        }
+        if (fields.email) fields._replyto = fields.email;
+        if (button) button.disabled = true;
+        try {
+          await sendToInbox("New membership application", fields);
+          document.getElementById("join-success").style.display = "block";
+          form.reset();
+        } catch (err) {
+          alert(
+            "Sorry, that didn't go through. Please email us at " + INBOX + "."
+          );
+        } finally {
+          if (button) button.disabled = false;
+        }
       }
 
       // Follow Me Therapy dialog
