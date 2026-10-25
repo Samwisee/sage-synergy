@@ -1536,6 +1536,171 @@
         }
       }
     </style>
+
+    <style>
+      /* ════════════════════════════════════════
+         MOTION: nothing snaps in, everything eases
+      ════════════════════════════════════════ */
+
+      /* Images fade up as they load instead of popping in. */
+      img.fade-img {
+        opacity: 0;
+        transition: opacity 0.9s var(--ease);
+      }
+      img.fade-img.loaded {
+        opacity: 1;
+      }
+
+      /* The hero image settles slowly into place. */
+      .hero-img.fade-img {
+        transform: scale(1.06);
+        transition:
+          opacity 1.2s var(--ease),
+          transform 2.6s var(--ease);
+      }
+      .hero-img.fade-img.loaded {
+        transform: scale(1);
+      }
+
+      /* Hero copy rises in line by line once the splash lifts. */
+      .hero-body > * {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.9s var(--ease),
+          transform 0.9s var(--ease);
+      }
+      body.ready .hero-body > * {
+        opacity: 1;
+        transform: none;
+      }
+      body.ready .hero-body > *:nth-child(2) { transition-delay: 0.08s; }
+      body.ready .hero-body > *:nth-child(3) { transition-delay: 0.18s; }
+      body.ready .hero-body > *:nth-child(4) { transition-delay: 0.28s; }
+      body.ready .hero-body > *:nth-child(5) { transition-delay: 0.4s; }
+      .hero-scroll {
+        opacity: 0;
+        transition: opacity 1s var(--ease) 0.9s;
+      }
+      body.ready .hero-scroll {
+        opacity: 1;
+      }
+
+      /* The mobile menu slides down rather than appearing. */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: flex;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-10px);
+          pointer-events: none;
+          transition:
+            opacity 0.3s var(--ease),
+            transform 0.3s var(--ease),
+            visibility 0s linear 0.3s;
+        }
+        .nav-links.open {
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+          pointer-events: auto;
+          transition:
+            opacity 0.3s var(--ease),
+            transform 0.3s var(--ease),
+            visibility 0s;
+        }
+      }
+
+      /* FAQ answers open and close smoothly (height animated in JS). */
+      .faq-answer {
+        overflow: hidden;
+      }
+      .faq-answer p {
+        transition:
+          opacity 0.35s var(--ease),
+          transform 0.35s var(--ease);
+      }
+      .faq-item:not([open]) .faq-answer p,
+      .faq-item.closing .faq-answer p {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      .faq-question::after {
+        transition: transform 0.35s var(--ease);
+      }
+
+      /* The project dialog fades and lifts in, and back out. */
+      .project-dialog[open] {
+        animation: dialogIn 0.45s var(--ease) both;
+      }
+      .project-dialog[open]::backdrop {
+        animation: backdropIn 0.45s var(--ease) both;
+      }
+      .project-dialog.closing {
+        animation: dialogOut 0.28s ease-in both;
+      }
+      .project-dialog.closing::backdrop {
+        animation: backdropOut 0.28s ease-in both;
+      }
+      @keyframes dialogIn {
+        from { opacity: 0; transform: translate(-50%, -46%) scale(0.97); }
+        to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      }
+      @keyframes dialogOut {
+        from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        to { opacity: 0; transform: translate(-50%, -47%) scale(0.98); }
+      }
+      @keyframes backdropIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes backdropOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+
+      /* Thank-you messages ease in after a form is sent. */
+      .signup-success.shown,
+      .join-success.shown {
+        display: block !important;
+        animation: messageIn 0.6s var(--ease) both;
+      }
+      @keyframes messageIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      /* A sending button dims gently while it waits. */
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: progress;
+        transform: none;
+      }
+      .btn {
+        transition:
+          transform 0.2s var(--ease),
+          box-shadow 0.2s var(--ease),
+          background 0.2s,
+          opacity 0.25s;
+      }
+
+      /* Respect a visitor's wish for less motion. */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+          transition-delay: 0s !important;
+        }
+        .reveal,
+        .hero-body > *,
+        img.fade-img {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -2814,9 +2979,16 @@
 
       // Splash dismiss
       const splash = document.getElementById("splash");
+      // If something slow holds up the page, don't keep visitors waiting.
+      setTimeout(() => {
+        document.body.classList.add("ready");
+        splash?.classList.add("hidden");
+      }, 4000);
       window.addEventListener("load", () => {
         setTimeout(() => {
           splash.classList.add("hidden");
+          // The hero rises in as the splash fades.
+          document.body.classList.add("ready");
           splash.addEventListener("transitionend", () => splash.remove(), {
             once: true,
           });
@@ -2857,7 +3029,7 @@
             email,
             _replyto: email,
           });
-          document.getElementById("signup-success").style.display = "block";
+          document.getElementById("signup-success").classList.add("shown");
           form.reset();
         } catch (err) {
           alert(
@@ -2888,7 +3060,7 @@
         if (button) button.disabled = true;
         try {
           await sendToInbox("New membership application", fields);
-          document.getElementById("join-success").style.display = "block";
+          document.getElementById("join-success").classList.add("shown");
           form.reset();
         } catch (err) {
           alert(
@@ -2909,9 +3081,25 @@
           fmtDialog.showModal();
         });
 
-        closeFmtDialog.addEventListener("click", () => {
-          fmtDialog.close();
+        // Fade out, then close.
+        const closeDialog = () => {
+          if (!fmtDialog.open || fmtDialog.classList.contains("closing")) return;
+          fmtDialog.classList.add("closing");
+          fmtDialog.addEventListener(
+            "animationend",
+            () => {
+              fmtDialog.classList.remove("closing");
+              fmtDialog.close();
+            },
+            { once: true },
+          );
+        };
+        fmtDialog.addEventListener("cancel", (event) => {
+          event.preventDefault();
+          closeDialog();
         });
+
+        closeFmtDialog.addEventListener("click", closeDialog);
 
         fmtDialog.addEventListener("click", (event) => {
           const rect = fmtDialog.getBoundingClientRect();
@@ -2922,10 +3110,55 @@
             event.clientY <= rect.bottom;
 
           if (!isInside) {
-            fmtDialog.close();
+            closeDialog();
           }
         });
       }
+
+      // ── Motion ──────────────────────────────────
+      // Images fade in as they arrive (and at once if already cached).
+      document.querySelectorAll("img").forEach((img) => {
+        img.classList.add("fade-img");
+        const done = () => img.classList.add("loaded");
+        if (img.complete && img.naturalWidth) done();
+        else {
+          img.addEventListener("load", done, { once: true });
+          img.addEventListener("error", done, { once: true });
+        }
+      });
+
+      // FAQ answers slide open and closed instead of snapping.
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        const summary = item.querySelector("summary");
+        const answer = item.querySelector(".faq-answer");
+        if (!summary || !answer) return;
+        let anim = null;
+        summary.addEventListener("click", (e) => {
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          e.preventDefault();
+          if (anim) anim.cancel();
+          const opening = !item.open || item.classList.contains("closing");
+          const start = answer.getBoundingClientRect().height;
+          if (opening) {
+            item.classList.remove("closing");
+            item.open = true;
+          } else {
+            item.classList.add("closing");
+          }
+          const end = opening ? answer.scrollHeight : 0;
+          anim = answer.animate(
+            [{ height: start + "px" }, { height: end + "px" }],
+            { duration: 380, easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
+          );
+          anim.onfinish = () => {
+            anim = null;
+            if (!opening) {
+              item.open = false;
+              item.classList.remove("closing");
+            }
+          };
+        });
+      });
     </script>
   </body>
 </html>
