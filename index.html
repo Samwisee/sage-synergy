@@ -1700,6 +1700,18 @@
           transform: none !important;
         }
       }
+
+      /* Pillar words: white initial, olive rest */
+      .pillar-word { font-family: var(--font-serif); font-size: 2.1rem; line-height: 1.1; color: #b5bd7c; margin-bottom: 12px; letter-spacing: 0.01em; }
+      .pillar-initial { color: var(--white); }
+      /* Dialog fits small screens */
+      .project-dialog[open] { max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; }
+      .project-dialog :focus:not(:focus-visible) { outline: none; box-shadow: none; }
+      .project-dialog:focus { outline: none; }
+      @media (max-width: 768px) {
+        .project-dialog-layout { min-height: 0; }
+        .project-dialog-photo { height: 240px; max-height: 240px; object-position: center 20%; }
+      }
     </style>
   </head>
 
@@ -1707,37 +1719,6 @@
     <!-- ══ SPLASH ═══════════════════════════════════════ -->
     <div class="splash" id="splash" aria-hidden="true">
       <div class="splash-inner">
-        <div class="splash-leaf" aria-hidden="true">
-          <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M10 52 Q40 34 110 8"
-              stroke="#c8ddbf"
-              stroke-width="1.5"
-              fill="none"
-              stroke-linecap="round"
-            />
-            <path
-              d="M28 44 Q18 30 24 14 Q36 28 28 44Z"
-              fill="#c8ddbf"
-              opacity="0.6"
-            />
-            <path
-              d="M50 34 Q38 20 44 4 Q58 18 50 34Z"
-              fill="#c8ddbf"
-              opacity="0.55"
-            />
-            <path
-              d="M72 24 Q60 10 66 -6 Q80 8 72 24Z"
-              fill="#c8ddbf"
-              opacity="0.6"
-            />
-            <path
-              d="M94 14 Q82 0 88 -16 Q102 -2 94 14Z"
-              fill="#c8ddbf"
-              opacity="0.5"
-            />
-          </svg>
-        </div>
         <p class="splash-name">Sage Connection</p>
         <p class="splash-tagline">Connect. Collaborate. Contribute.</p>
         <div class="splash-dots" aria-label="Loading">
@@ -1778,12 +1759,6 @@
           opacity: 1;
           transform: none;
         }
-      }
-
-      .splash-leaf {
-        width: 110px;
-        margin: 0 auto 20px;
-        opacity: 0.85;
       }
 
       .splash-name {
@@ -1938,29 +1913,25 @@
     <div class="pillars">
       <div class="pillars-grid">
         <div class="pillar reveal">
-          <div class="pillar-letter">S</div>
-          <div class="pillar-name">Support</div>
+          <div class="pillar-word"><span class="pillar-initial">S</span>upport</div>
           <div class="pillar-desc">
             A caring network that holds you through every transition
           </div>
         </div>
         <div class="pillar reveal reveal-delay-1">
-          <div class="pillar-letter">A</div>
-          <div class="pillar-name">Advice</div>
+          <div class="pillar-word"><span class="pillar-initial">A</span>dvice</div>
           <div class="pillar-desc">
             Trusted guidance from women who understand your journey
           </div>
         </div>
         <div class="pillar reveal reveal-delay-2">
-          <div class="pillar-letter">G</div>
-          <div class="pillar-name">Guidance</div>
+          <div class="pillar-word"><span class="pillar-initial">G</span>uidance</div>
           <div class="pillar-desc">
             Mentoring and direction to shape your next chapter
           </div>
         </div>
         <div class="pillar reveal reveal-delay-3">
-          <div class="pillar-letter">E</div>
-          <div class="pillar-name">Experience</div>
+          <div class="pillar-word"><span class="pillar-initial">E</span>xperience</div>
           <div class="pillar-desc">
             Decades of wisdom shared, honoured, and put to work
           </div>
@@ -3079,6 +3050,7 @@
       if (fmtDialog && openFmtDialog && closeFmtDialog) {
         openFmtDialog.addEventListener("click", () => {
           fmtDialog.showModal();
+          fmtDialog.focus({ preventScroll: true });
         });
 
         // Fade out, then close.
